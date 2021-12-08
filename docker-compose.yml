@@ -1,0 +1,17 @@
+version: '3'
+services:
+  greet-service:
+    build: ./
+    image: volvo-service
+    hostname: localhost
+    restart: always
+    ports:
+      - "9091-9092:9091"
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+    healthcheck:
+      test: "exit 0"
+    deploy:
+      mode: replicated
+      replicas: 2
